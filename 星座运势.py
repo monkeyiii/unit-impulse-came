@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-xingzuo = "Cancer"
+xingzuo = "Cancer/"
 yunshia= "https://www.d1xz.net/yunshi/today/Aries/"
 yunshiw= yunshia[:34] + xingzuo
 req = requests.get(url=yunshiw)
