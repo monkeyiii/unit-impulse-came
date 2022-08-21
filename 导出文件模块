@@ -1,0 +1,6 @@
+import sys
+import os
+fw = open("C:\\aceshi\\resultq.txt", "w")
+# aceshi 为我为resultq.txt测试所用的文件夹
+fw.write("导出文件测试")
+fw.write("\n")
