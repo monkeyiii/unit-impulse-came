@@ -67,18 +67,27 @@ class MainFrame(wx.Frame):
 
     def on_year(self, evt):
         """年函数"""
+        year = evt.GetInt()
+        self.tc1.SetValue(year)
 
     def on_month(self, evt):
         """月函数"""
+        month = evt.GetInt
+        self.tc2.SetValue(month)
 
     def on_day(self, evt):
         """日函数"""
+        day = evt.GetInt
+        self.tc3.SetValue(day)
 
     def on_result(self, evt):
         """结果函数"""
 
     def on_clear(self, evt):
         """清除函数"""
+        self.tc1.SetValue('')
+        self.tc2.SetValue('')
+        self.tc3.SetValue('')
 
     def on_require(self, evt):
         """查询函数"""
