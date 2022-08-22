@@ -1,3 +1,4 @@
+
 import wx
 
 
@@ -7,89 +8,91 @@ class MainFrame(wx.Frame):
     def __init__(self, parent):
         """构造函数"""
 
-        # 调用父类的构造函数，从默认风格中去除改变窗口大小
-        wx.Frame.__init__(self, parent, style=wx.DEFAULT_FRAME_STYLE ^ wx.RESIZE_BORDER)
+        wx.Frame.__init__(self, parent, style=wx.DEFAULT_FRAME_STYLE)
 
         self.SetTitle('星座运势查询小程序')
         # self.SetIcon(wx.Icon('res/wx.ico'))
-        self.SetSize((860, 450))
+        self.SetBackgroundColour((224, 224, 224))  # 设置窗口背景色
+        self.SetSize((450, 450))
+        self._init_ui()
         self.Center()
 
-        # 创建一个面板，用于放置控件
-        panel = wx.Panel(self, -1)
+    def _init_ui(self):
+        """初始化界面"""
+        wx.StaticText(self, -1, '请输入出生年月日', pos=(125, 0), size=(100, -1))
+        wx.StaticText(self, -1, '年', pos=(40, 30), size=(100, -1), style=wx.ALIGN_RIGHT)
+        wx.StaticText(self, -1, '月', pos=(40, 60), size=(100, -1), style=wx.ALIGN_RIGHT)
+        wx.StaticText(self, -1, '日', pos=(40, 90), size=(100, -1), style=wx.ALIGN_RIGHT)
+        wx.StaticText(self, -1, '查询结果', pos=(80, 200), size=(100, -1), style=wx.ALIGN_RIGHT)
+        wx.StaticText(self, -1, '请选择查询项', pos=(100, 135), size=(100, -1), style=wx.ALIGN_RIGHT)
 
-        # 在x=20，y=20的位置，创建静态文本控件
-        st = wx.StaticText(panel, -1, '请输入出生年月', pos=(20, 20))
+        self.tc1 = wx.TextCtrl(self, -1, '', pos=(145, 20), size=(150, -1), name='TC01', style=wx.TE_CENTER)
+        self.tc2 = wx.TextCtrl(self, -1, '', pos=(145, 50), size=(150, -1), name='TC02', style=wx.TE_CENTER)
+        self.tc3 = wx.TextCtrl(self, -1, '', pos=(145, 80), size=(150, -1), name='TC03', style=wx.TE_CENTER)
+        self.tc4 = wx.TextCtrl(self, -1, '', pos=(130, 220), size=(160, 80), name='TC04',
+                               style=wx.TE_MULTILINE | wx.CB_READONLY)
+        self.cb_birthday = wx.CheckBox(self, -1, '生日', pos=(130, 160), name='CB01')
+        self.cb_constellation = wx.CheckBox(self, -1, '星座', pos=(190, 160), name='CB02')
+        self.cb_fortune = wx.CheckBox(self, -1, '运势', pos=(250, 160), name='CB03')
 
-        # 在x=20，y=50的位置，创建静态文本控件
-        st = wx.StaticText(panel, -1, '年', pos=(20, 50))
+        btn_require = wx.Button(self, -1, '查询', pos=(300, 220), size=(100, 25))
+        btn_clear = wx.Button(self, -1, '清除', pos=(300, 80), size=(100, 25))
+        btn_close = wx.Button(self, -1, '关闭窗口', pos=(300, 270), size=(100, 25))
 
-        # 在x=20, y=80的位置，创建文本输入框，指定输入框的宽度为100像素，高度默认
-        tc1 = wx.TextCtrl(panel, -1, value='', pos=(20, 80), size=(100, -1))
+        self.tc1.Bind(wx.EVT_TEXT, self.on_year)
+        self.tc2.Bind(wx.EVT_TEXT, self.on_month)
+        self.tc3.Bind(wx.EVT_TEXT, self.on_day)
+        self.tc3.Bind(wx.EVT_TEXT, self.on_result)
 
-        # 在x=200，y=50的位置，创建静态文本控件
-        st = wx.StaticText(panel, -1, '月', pos=(200, 50))
+        btn_clear.Bind(wx.EVT_BUTTON, self.on_clear, btn_clear)
+        btn_require.Bind(wx.EVT_BUTTON, self.on_require, btn_require)
+        btn_close.Bind(wx.EVT_BUTTON, self.on_close, btn_close)
 
-        # 在x=400, y=80的位置，创建文本输入框，指定输入框的宽度为100像素，高度默认
-        tc1 = wx.TextCtrl(panel, -1, value='', pos=(400, 80), size=(100, -1))
+        self.Bind(wx.EVT_BUTTON, self.on_clear)
+        self.Bind(wx.EVT_BUTTON, self.on_require)
+        self.Bind(wx.EVT_CLOSE, self.on_close)
 
-        # 在x=400，y=50的位置，创建静态文本控件
-        st = wx.StaticText(panel, -1, '日', pos=(400, 50))
+        self.Bind(wx.EVT_CHECKBOX, self.on_birthday)
+        self.Bind(wx.EVT_CHECKBOX, self.on_constellation)
+        self.Bind(wx.EVT_CHECKBOX, self.on_fortune)
 
-        # 在x=200, y=80的位置，创建文本输入框，指定输入框的宽度为100像素，高度默认
-        tc1 = wx.TextCtrl(panel, -1, value='', pos=(200, 80), size=(100, -1))
+    def on_birthday(self, evt):
+        """生日选项函数"""
 
+    def on_constellation(self, evt):
+        """星座选项函数"""
 
+    def on_fortune(self, evt):
+        """运势选项函数"""
 
-        # 在x=20, y=130的位置，创建单选按钮，成组的单选按钮，第一个需要指定样式wx.RB_GROUP
-        #rb1 = wx.RadioButton(panel, -1, '单选按钮1', pos=(20, 130), style=wx.RB_GROUP, name='rb1')
+    def on_year(self, evt):
+        """年函数"""
 
-        # 在x=100, y=130的位置，创建单选按钮，不再需要指定样式wx.RB_GROUP
-        #rb2 = wx.RadioButton(panel, -1, '单选按钮2', pos=(100, 130), name='rb2')
+    def on_month(self, evt):
+        """月函数"""
 
-        # 在x=180, y=130的位置，创建单选按钮，不再需要指定样式wx.RB_GROUP
-        #rb3 = wx.RadioButton(panel, -1, '单选按钮3', pos=(180, 130), name='rb3')
+    def on_day(self, evt):
+        """日函数"""
 
-        # 在x=20，y=130的位置，创建静态文本控件
-        st = wx.StaticText(panel, -1, '请选择查询项', pos=(20, 130))
+    def on_result(self, evt):
+        """结果函数"""
 
-        # 在x=20, y=160的位置，创建复选按钮
-        cb1 = wx.CheckBox(panel, -1, '生日', pos=(20, 160))
+    def on_clear(self, evt):
+        """清除函数"""
 
-        # 在x=100, y=160的位置，创建复选按钮
-        cb1 = wx.CheckBox(panel, -1, '星座', pos=(100, 160))
+    def on_require(self, evt):
+        """查询函数"""
 
-        # 在x=180, y=160的位置，创建复选按钮
-        cb1 = wx.CheckBox(panel, -1, '运势', pos=(180, 160))
+    def on_close(self, evt):
+        """关闭窗口事件函数"""
 
-        # 在x=260, y=160的位置，创建复选按钮
-        cb1 = wx.CheckBox(panel, -1, '将运势导出', pos=(260, 160))
-
-        # 在x=100, y=160的位置，创建复选按钮，指定其样式为wx.ALIGN_RIGHT
-        #cb2 = wx.CheckBox(panel, -1, '文字在左侧的复选按钮', pos=(100, 160), style=wx.ALIGN_RIGHT)
-
-        # 在x=20，y=190的位置，创建按钮
-        #ch = wx.Choice(panel, -1, choices=['wxPython', 'PyQt', 'Tkinter'], pos=(20, 190), size=(100, -1))
-        #ch.SetSelection(0)
-
-        # 在x=600，y=80的位置，创建按钮
-        btn = wx.Button(panel, -1, '清空', pos=(600, 80))
-
-        # 在x=20，y=190的位置，创建按钮
-        btn = wx.Button(panel, -1, '开始查询', pos=(20, 190))
-
-        # 在x=20，y=230的位置，创建文本框，指定大小为260*150，并指定其样式为多行和只读
-        tc3 = wx.TextCtrl(panel, -1, value='结果', pos=(20, 230), size=(260, 150),
-                          style=wx.TE_MULTILINE | wx.CB_READONLY)
-
-        def _init_ui(self):
-            btn_close = wx.Button(self, -1, '关闭窗口', pos=(350, 700), size=(100, 25))
-
-
+        dlg = wx.MessageDialog(None, '确定要关闭本窗口？', '操作提示', wx.YES_NO | wx.ICON_QUESTION)
+        if dlg.ShowModal() == wx.ID_YES:
+            self.Destroy()
 
 
 if __name__ == '__main__':
-    app = wx.App()  # 创建一个应用程序
-    frame = MainFrame(None)  # 创建主窗口
-    frame.Show()  # 显示窗主口
-    app.MainLoop()  # 应用程序进入事件处理主循环
+    app = wx.App()
+    frame = MainFrame(None)
+    frame.Show()
+    app.MainLoop()
